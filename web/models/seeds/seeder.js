@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const Patients = require('../patients')
 const Orders = require('../orders')
 const patientsSeed = require('./patients.json')
@@ -26,5 +27,5 @@ db.once('open', async () => {
 		}
 	}
 	
-	console.log('finish adding seed')
+	console.log('adding seeds done')
 })

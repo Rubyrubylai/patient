@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 var methodOverride = require('method-override')
 
+const logger = require('./config/logs')
+
 const app = express()
 const port = 3000
 
@@ -10,11 +12,11 @@ const db = mongoose.connection
 mongoose.connect('mongodb://mongo/patientOrders')
 
 db.on('error', () => {
-	console.log('db connection error')
+	logger.error('db connection error')
 })
 
 db.once('open', () => {
-	console.log('db connection success')
+	logger.info('db connection success')
 })
 
 app.use(bodyParser.json())
@@ -30,6 +32,7 @@ app.use((err, req, res, next) => {
 			message: err.message
 		})
 
+	logger.error(err)
 	res.status(500).json({
 		code: 500,
 		message: 'server error'
@@ -37,5 +40,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(port, () => {
-	console.log('app is running')
+	logger.info('app is running')
 })

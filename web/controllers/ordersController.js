@@ -1,6 +1,5 @@
 const Orders = require('../models/orders')
 
-
 ordersController = {
 	getOrders: async (req, res) => {
 		const { patientId } = req.params
